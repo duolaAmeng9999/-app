@@ -1,7 +1,7 @@
 const install = (Vue, vm) => {
     // 此为自定义配置参数，具体参数见上方说明
     Vue.prototype.$u.http.setConfig({
-        baseUrl: 'https://jsonplaceholder.typicode.com',
+        baseUrl: 'https://gmall-prod.atguigu.cn/api',
         loadingText: '努力加载中~',
         loadingTime: 800,
     });

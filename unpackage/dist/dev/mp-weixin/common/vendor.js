@@ -12513,7 +12513,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var install = function install(Vue, vm) {
   // 此为自定义配置参数，具体参数见上方说明
   Vue.prototype.$u.http.setConfig({
-    baseUrl: 'https://jsonplaceholder.typicode.com',
+    baseUrl: 'https://gmall-prod.atguigu.cn/api',
     loadingText: '努力加载中~',
     loadingTime: 800 });
 
@@ -12541,15 +12541,177 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-// 如果没有通过拦截器配置域名的话，可以在这里写上完整的URL(加上域名部分)
-var todosUrl = "/todos";
-var install = function install(Vue, vm) {
-  // 此处没有使用传入的params参数
-  var getTodos = function getTodos() {return vm.$u.get(todosUrl);};
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _const = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './const.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+var get_baidu_map_address = "https://api.map.baidu.com/reverse_geocoding/v3/?output=json&ak=".concat(_const.BAIDU_MAP_WEB_AK, "&coordtype=wgs84ll&location="); // 通过经纬度获取地址信息
+var get_home_index = 'home/index'; // 获取首页数据
+var get_sys_region_find_all_list = '/sys/region/findAllList'; // 查询所有提供点的区域
+var get_search_leader = '/search/leader'; // 根据经纬度搜索提货点
+var get_select_leader = 'user/leader/auth/selectLeader'; // 选择提货点
+var get_categories = '/home/category'; // 获取分类
+var get_search_sku = '/search/sku'; // 搜索商品
+var get_home_item = '/home/item'; // 商品详情
+var get_add_to_cart = '/cart/addToCart'; // 加入购物车
+var get_cart_list = '/cart/cartList'; // 购物车列表
+var get_check_cart = '/cart/checkCart'; // 切换购物车商品的选中状态
+var delete_cart = '/cart/deleteCart'; // 删除购物车
+var get_activity_cart_list = '/cart/activityCartList'; // 带活动的购物车列表
+var get_check_all_cart = '/cart/checkAllCart'; // 对所有购物车商品进行全选/反选
+var post_batch_check_cart = '/cart/batchCheckCart'; // 对指定的多个商品进行选择/反选
+var get_find_all_sec_kill_time_list =
+'/activity/seckill/findAllSeckillTimeList'; // 从缓存中查询时间段列表
+var get_find_sec_kill_sku_list = '/activity/seckill/findSeckillSkuList/'; // 从缓存中读取秒杀sku
+var get_coupon_info = '/activity/auth/getCouponInfo/'; // 领取优惠券
+var get_confirm_order = '/order/auth/confirmOrder'; // 确认订单
+var post_submit_order = '/order/auth/submitOrder'; // 生成订单
+var get_order_info = '/order/auth/getOrderInfoById'; // 订单详情
+var get_wx_login = '/user/weixin/wxLogin'; // 微信用户登陆
+var post_update_user = '/user/weixin/auth/updateUser'; // 更新用户信息
+var get_weixin_payment = '/payment/weixin/createJsapi/'; // 获取微信支付信息
+var get_find_user_order = '/order/auth/findUserOrderPage'; // 获取用户订单信息
 
-  // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-  vm.$u.api = { getTodos: getTodos };
+var install = function install(Vue, vm) {
+  var limit = 10;
+  var page = 1;
+
+  // 获取首页数据
+  var getHomeIndex = function getHomeIndex() {return vm.$u.get(get_home_index);};
+  /*---------------------------------------------------------
+                                                                                        提货点模块
+                                                                                    ---------------------------------------------------------*/
+  // 根据经纬度获取地址信息
+  var getBaiduMapAddress = function getBaiduMapAddress(o) {return (
+      vm.$u.get(get_baidu_map_address + "".concat(o.latitude, ",").concat(o.longitude)));};
+  // 查询所有提供点的区域
+  var getSysRegionFindAllList = function getSysRegionFindAllList() {return (
+      vm.$u.get(get_sys_region_find_all_list, {
+        showLoading: false }));};
+
+  // 根据经纬度搜索提货点
+  var getSearchLeader = function getSearchLeader(o) {return (
+      vm.$u.get(get_search_leader + "/".concat(o.page, "/").concat(o.limit), _objectSpread(_objectSpread({},
+      o), {}, {
+        showLoading: false })));};
+
+  // 选择提货点
+  var getSelectLeader = function getSelectLeader(o) {return (
+      vm.$u.get(get_select_leader + "/".concat(o.leaderId), {
+        showLoading: false }));};
+
+  /*---------------------------------------------------------
+                                        商品模块
+                                    ---------------------------------------------------------*/
+  // 获取分类
+  var getCategories = function getCategories() {return (
+      vm.$u.get(get_categories, {
+        showLoading: false }));};
+
+  // 搜索商品
+  var getSearchSku = function getSearchSku(o) {return (
+      vm.$u.get(get_search_sku + "/".concat(o.page || page, "/").concat(o.limit || limit), _objectSpread(_objectSpread({},
+      o), {}, {
+        limit: o.limit || limit })));};
+
+  // 商品详情
+  var getHomeItem = function getHomeItem(o) {return vm.$u.get(get_home_item + "/".concat(o.skuId));};
+  /*---------------------------------------------------------
+                                                                                                            秒杀模块
+                                                                                                        ---------------------------------------------------------*/
+  // 从缓存中查询时间段列表
+  var getFindAllSeckillTimeList = function getFindAllSeckillTimeList() {return (
+      vm.$u.get(get_find_all_sec_kill_time_list));};
+  // 从缓存中读取秒杀sku
+  var getFindSeckillSkuList = function getFindSeckillSkuList(o) {return (
+      vm.$u.get(get_find_sec_kill_sku_list + "/".concat(o.timeName)));};
+  /*---------------------------------------------------------
+                                                                               购物车模块
+                                                                           ---------------------------------------------------------*/
+  // 加入购物车
+  var getAddToCart = function getAddToCart(o) {return (
+      vm.$u.get(get_add_to_cart + "/".concat(o.skuId, "/").concat(o.skuNum), {
+        showLoading: false }));};
+
+  // 购物车列表
+  var getCartList = function getCartList() {return vm.$u.get(get_cart_list);};
+  // 切换购物车商品的选中状态
+  var getCheckCart = function getCheckCart(o) {return (
+      vm.$u.get(get_check_cart + "/".concat(o.skuId, "/").concat(o.isChecked), {
+        showLoading: false }));};
+
+  // 删除购物车
+  var deleteCart = function deleteCart(skuId) {return (
+      vm.$u.delete(delete_cart + "/".concat(skuId), {
+        showLoading: false }));};
+
+  // 带活动的购物车列表
+  var getActivityCartList = function getActivityCartList(o) {return (
+      vm.$u.get(get_activity_cart_list, {
+        showLoading: o.showLoading ? o.showLoading : false }));};
+
+  // 对所有购物车商品进行全选/反选
+  var getCheckAllCart = function getCheckAllCart(o) {return (
+      vm.$u.get(get_check_all_cart + "/".concat(o.isChecked), {
+        showLoading: o.showLoading ? o.showLoading : false }));};
+
+  // 对指定的多个商品进行选择/反选
+  var postBatchCheckCart = function postBatchCheckCart(o) {return (
+      vm.$u.post(post_batch_check_cart + "/".concat(o.isChecked), o.skuIdList));};
+  // 领取优惠券
+  var getCouponInfo = function getCouponInfo(o) {return vm.$u.get(get_coupon_info + "/".concat(o.id));};
+  // 确认订单
+  var getConfirmOrder = function getConfirmOrder() {return vm.$u.get(get_confirm_order);};
+  // 生成订单
+  var postSubmitOrder = function postSubmitOrder(o) {return vm.$u.post(post_submit_order, o);};
+  // 订单详情
+  var getOrderInfo = function getOrderInfo(o) {return vm.$u.get(get_order_info + "/".concat(o.orderId));};
+  // 获取微信支付信息
+  var getWxPayment = function getWxPayment(o) {return vm.$u.get(get_weixin_payment + "/".concat(o.orderNo));};
+  /*---------------------------------------------------------
+                                                                                                                     用户登陆
+                                                                                                                 ---------------------------------------------------------*/
+  // 微信用户登陆
+  var getWxLogin = function getWxLogin(o) {return (
+      vm.$u.get(get_wx_login + "/".concat(o.code), {
+        showLoading: false }));};
+
+  // 更新用户信息
+  var postUpdateUser = function postUpdateUser(o) {return (
+      vm.$u.post(post_update_user, _objectSpread(_objectSpread({},
+      o), {}, {
+        showLoading: false })));};
+
+  // 获取用户订单信息
+  var getFindUserOrder = function getFindUserOrder(o) {return (
+      vm.$u.get(get_find_user_order + "/".concat(o.page, "/").concat(o.limit), _objectSpread({},
+      o)));};
+
+
+  vm.$u.api = {
+    getHomeIndex: getHomeIndex,
+    getSysRegionFindAllList: getSysRegionFindAllList,
+    getSearchLeader: getSearchLeader,
+    getSelectLeader: getSelectLeader,
+    getCategories: getCategories,
+    getSearchSku: getSearchSku,
+    getHomeItem: getHomeItem,
+    getAddToCart: getAddToCart,
+    getCartList: getCartList,
+    getCheckCart: getCheckCart,
+    deleteCart: deleteCart,
+    getActivityCartList: getActivityCartList,
+    getCheckAllCart: getCheckAllCart,
+    postBatchCheckCart: postBatchCheckCart,
+    getBaiduMapAddress: getBaiduMapAddress,
+    getFindAllSeckillTimeList: getFindAllSeckillTimeList,
+    getFindSeckillSkuList: getFindSeckillSkuList,
+    getCouponInfo: getCouponInfo,
+    getConfirmOrder: getConfirmOrder,
+    postSubmitOrder: postSubmitOrder,
+    getOrderInfo: getOrderInfo,
+    getWxPayment: getWxPayment,
+    getWxLogin: getWxLogin,
+    postUpdateUser: postUpdateUser,
+    getFindUserOrder: getFindUserOrder };
+
 };var _default =
 
 {
