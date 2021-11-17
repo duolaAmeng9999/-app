@@ -10056,7 +10056,30 @@ var state = {
   home: {} };
 
 // 获取内容
-var getters = {};var _default =
+var getters = {
+  categoryList: function categoryList(state) {// 商品分类
+    return state.home.categoryList || [];
+  },
+  hotSkuList: function hotSkuList(state) {// 热销商品
+    return state.home.hotSkuList || [];
+  },
+  leaderAddressVo: function leaderAddressVo(state) {// 提货点
+    return state.home.leaderAddress || [];
+  },
+  newPersonSkuInfoList: function newPersonSkuInfoList(state) {// 新人专享
+    return state.home.newPersonSkuInfoList || [];
+  },
+
+  seckillTime: function seckillTime(state) {// 秒杀时间
+    return state.home.seckillTime || {};
+  },
+
+  seckillSkuVoList: function seckillSkuVoList(state) {// 秒杀商品列表
+    return state.home.seckillSkuVoList || [];
+  } };var _default =
+
+
+
 
 
 {
