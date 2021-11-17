@@ -14,7 +14,6 @@ export default new Vuex.Store({
 			storage: {
 				getItem: key => uni.getStorageSync(key),
 				setItem: (key, value) => {
-					console.log(key, value)
 					uni.setStorageSync(key, value)
 				},
 				removeItem: key => uni.removeStorageSync(key)

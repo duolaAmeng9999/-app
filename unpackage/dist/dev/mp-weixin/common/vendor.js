@@ -8762,7 +8762,6 @@ new _vuex.default.Store({
     storage: {
       getItem: function getItem(key) {return uni.getStorageSync(key);},
       setItem: function setItem(key, value) {
-        console.log(key, value);
         uni.setStorageSync(key, value);
       },
       removeItem: function removeItem(key) {return uni.removeStorageSync(key);} } })],
@@ -10038,14 +10037,27 @@ module.exports = index_cjs;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 设置状态
-var state = {};
-// 获取内容
-var getters = {};
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 15));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 异步操作
+var actions = {
+  getHomeIndex: function getHomeIndex(context) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                _this._vm.$u.api.getHomeIndex());case 2:result = _context.sent;
+              context.commit("GETHOMEINDEX", result);case 4:case "end":return _context.stop();}}}, _callee);}))();
+  } };
+
 // 修改数据
-var mutations = {};
-// 异步操作
-var actions = {};var _default =
+var mutations = {
+  GETHOMEINDEX: function GETHOMEINDEX(state, result) {
+    state.home = result;
+  } };
+
+
+// 设置状态
+var state = {
+  home: {} };
+
+// 获取内容
+var getters = {};var _default =
+
 
 {
   namespaced: true,
@@ -12521,7 +12533,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var install = function install(Vue, vm) {
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var install = function install(Vue, vm) {
   // 此为自定义配置参数，具体参数见上方说明
   Vue.prototype.$u.http.setConfig({
     baseUrl: 'https://gmall-prod.atguigu.cn/api',
@@ -12531,17 +12543,33 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   // 请求拦截部分，如配置，每次请求前都会执行
   Vue.prototype.$u.http.interceptor.request = function (config) {
+    config.header.token = uni.getStorageSync('token');
     return config;
   };
 
   // 响应拦截，如配置，每次请求结束都会执行本方法
   Vue.prototype.$u.http.interceptor.response = function (res) {
-    return res;
+    if (res.code == 200) {
+      return res.data;
+    } else if (res.code == 208) {
+      uni.redirectTo({
+        url: "/pages/login/login" });
+
+      return false;
+    } else {
+      // 错误信息提示
+      uni.showToast({
+        title: res.message,
+        icon: 'none' });
+
+      return false;
+    }
   };
 
 };var _default =
 {
   install: install };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 46 */
