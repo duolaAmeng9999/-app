@@ -107,12 +107,6 @@ try {
     uButton: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 103))
     },
-    ListImageItem: function() {
-      return __webpack_require__.e(/*! import() | components/ListImageItem/ListImageItem */ "components/ListImageItem/ListImageItem").then(__webpack_require__.bind(null, /*! @/components/ListImageItem/ListImageItem.vue */ 110))
-    },
-    AddToCard: function() {
-      return __webpack_require__.e(/*! import() | components/AddToCard/AddToCard */ "components/AddToCard/AddToCard").then(__webpack_require__.bind(null, /*! @/components/AddToCard/AddToCard.vue */ 115))
-    },
     uImage: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-image/u-image */ "node-modules/uview-ui/components/u-image/u-image").then(__webpack_require__.bind(null, /*! uview-ui/components/u-image/u-image.vue */ 120))
     },
