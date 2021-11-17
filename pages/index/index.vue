@@ -245,12 +245,8 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {  
-=======
 import { mapActions } from "vuex";
 export default {
->>>>>>> wenjing
   data() {
     return {
       list: ["请给我一点好运！", "剩下我自己努力！"],

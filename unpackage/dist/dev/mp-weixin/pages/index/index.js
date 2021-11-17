@@ -182,9 +182,317 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/weixin/uin-app初始/wenjing/pages/index/index.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js):\nSyntaxError: Unexpected token (248:0)\n    at Object._raise (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:746:17)\n    at Object.raiseWithData (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:739:17)\n    at Object.raise (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:733:17)\n    at Object.unexpected (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:8807:16)\n    at Object.parseExprAtom (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:10130:20)\n    at Object.parseExprSubscripts (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9656:23)\n    at Object.parseMaybeUnary (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9636:21)\n    at Object.parseMaybeUnary (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6877:20)\n    at Object.parseExprOps (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9506:23)\n    at Object.parseMaybeConditional (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9479:23)\n    at Object.parseMaybeAssign (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9434:21)\n    at Object.parseMaybeAssign (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6822:20)\n    at Object.parseExpression (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:9386:23)\n    at Object.parseStatementContent (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:11285:23)\n    at Object.parseStatementContent (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:6575:18)\n    at Object.parseStatement (E:\\app\\hbuilderX\\HBuilderX.3.2.12.20211029.full\\HBuilderX\\plugins\\uniapp-cli\\node_modules\\@babel\\parser\\lib\\index.js:11156:17)");
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 15));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+{
+  data: function data() {
+    return {
+      list: ["请给我一点好运！", "剩下我自己努力！"],
+      // 自定义导航栏的渐变色
+      background: {
+        backgroundImage:
+        "linear-gradient(45deg, rgb(214, 208,254), rgb(251, 192, 250))" },
+
+      customStyleRight: {
+        borderRadius: "30rpx",
+        marginRight: "20rpx" },
+
+      show: false, // 控制平台销售规则框的显示与隐藏
+      categorySVPercent: "", // 控制进度条的百分比
+      windowWidth: "", // 设备的宽度
+      token: null // 用来判断用户是否登录; 否则跳转到登录页
+    };
+  },
+  methods: _objectSpread({
+    // 滑动商品分类列表函数
+    scrollMove: function scrollMove(event) {var _this = this;
+      // 获取到每次滑动的距离
+      var scrollLeft = event.detail.scrollLeft;
+      // 获取到滑动区域的总宽度
+      var scrollWidth = event.detail.scrollWidth - this.windowWidth;
+      // 计算出比例
+      var percent = scrollLeft / scrollWidth * 100;
+
+      // 利用防抖来进行性能的优化; 否则会实时的更新进度条; 性能消耗
+      this.$u.debounce(function () {
+        _this.categorySVPercent = percent;
+      }, 100);
+    } },
+
+  (0, _vuex.mapActions)("indexModule", ["getHomeIndex"])),
+
+  onLoad: function onLoad() {var _this2 = this;
+    // 获取设备的宽度
+    uni.getSystemInfo({
+      complete: function complete(res) {
+        _this2.windowWidth = res.windowWidth;
+      } });
+
+  },
+  mounted: function mounted() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var token;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                uni.getStorageSync("token"));case 2:token = _context.sent;_context.next = 5;return (
+                token);case 5:_this3.token = _context.sent;if (!
+
+              _this3.$u.test.isEmpty(token)) {_context.next = 9;break;}
+              uni.reLaunch({
+                url: "/pages/login/login" });return _context.abrupt("return");case 9:_context.next = 11;return (
+
+
+
+
+                _this3.getHomeIndex());case 11:case "end":return _context.stop();}}}, _callee);}))();
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
