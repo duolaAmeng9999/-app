@@ -5,7 +5,9 @@
       <u-navbar :is-back="false" title="hello！文静" :background="background">
         <view class="gg-map-slot-wrap">
           <u-icon name="map" size="24"></u-icon>
-          <text class="u-p-l-10 u-p-r-10">请设置提货点</text>
+          <text class="u-p-l-10 u-p-r-10">{{
+            leaderAddressVo.takeName ? leaderAddressVo.takeName : "请设置提货点"
+          }}</text>
           <u-icon name="arrow-right" size="20"></u-icon>
         </view>
       </u-navbar>
@@ -44,15 +46,15 @@
             <view
               scroll-item
               class="gg-new-vip-sv-item u-p-r-20"
-              v-for="n in 10"
-              :key="n"
+              v-for="item in newPersonSkuInfoList"
+              :key="item.id"
             >
               <ListImageItem
                 width="200rpx"
                 height="200rpx"
-                src="/static/爱尔兰.jpg"
+                :src="item.imgUrl"
               ></ListImageItem>
-              <text class="u-type-error">￥18.88</text>
+              <text class="u-type-error">￥{{ item.price }}</text>
               <AddToCard></AddToCard>
             </view>
           </scroll-view>
@@ -141,14 +143,18 @@
       <scroll-view scroll-x enable-flex @scroll="scrollMove">
         <view class="u-flex u-p-r-20 u-p-t-20">
           <!-- 分类循环 -->
-          <view class="u-p-l-20 u-p-r-20" v-for="n in 10" :key="n">
+          <view
+            class="u-p-l-20 u-p-r-20"
+            v-for="item in categoryList"
+            :key="item.id"
+          >
             <u-image
-              src="https://cdn.uviewui.com/uview/swiper/1.jpg"
+              :src="item.imgUrl"
               border-radius="30rpx"
               width="100rpx"
               height="100rpx"
             ></u-image>
-            <text class="u-font-xs">商品分类</text>
+            <text class="u-font-xs">{{ item.name }}</text>
           </view>
         </view>
       </scroll-view>
@@ -164,11 +170,15 @@
       ></view>
     </view>
 
-    <view class="u-m-l-20 u-m-r-20 u-flex">
+    <view class="u-m-l-20 u-m-r-20 u-flex" v-if="seckillTime.length > 0">
       <view class="u-flex u-flex-1">
         <view class="u-type-error u-font-lg">
           秒杀抢购：
-          <text class="u-font-sm">08:00场 08:00-23:00</text>
+          <text class="u-font-sm"
+            >{{ seckillTime.name }}场 {{ seckillTime.startTime }}-{{
+              seckillTime.endTime
+            }}</text
+          >
         </view>
       </view>
       <u-button :plain="true" size="mini">查看全部 ></u-button>
@@ -179,17 +189,17 @@
           <!-- 循环滚动内容 -->
           <view
             class="u-p-l-20 u-p-r-20 u-text-center"
-            v-for="n in 10"
-            :key="n"
+            v-for="item in seckillSkuVoList"
+            :key="item.skuId"
           >
-            <text class="u-font-sm u-m-b-5">08:00</text>
+            <text class="u-font-sm u-m-b-5">{{ item.timeName }}</text>
             <u-image
               src="https://img0.baidu.com/it/u=1832250010,3404880111&fm=26&fmt=auto"
               border-radius="30rpx"
               width="200rpx"
               height="200rpx"
             ></u-image>
-            <text class="u-font-sm u-m-t-5">商品名称</text>
+            <text class="u-font-sm u-m-t-5">{{ item.skuName }}</text>
             <AddToCart></AddToCart>
           </view>
         </view>
@@ -215,25 +225,38 @@
 
     <!-- 热销好货 -->
     <view class="u-font-xl u-type-error u-m-20">热销好货</view>
-    <view class="u-p-20 u-m-20 gg-border" v-for="n in 10" :key="n">
+    <view
+      class="u-p-20 u-m-20 gg-border"
+      v-for="item in hotSkuList"
+      :key="item.id"
+    >
       <view class="u-m-b-10 u-m-l-20 u-m-r-20 u-flex gg-product-item">
         <ListImageItem
-          src="/static/OIP (1).jpg"
+          :src="item.imgUrl"
           width="200rpx"
           height="200rpx"
         ></ListImageItem>
         <view class="gg-product-item-msg u-border-bottom u-p-b-20 u-m-l-20">
           <view class="gg-product-item-msg-title">
-            <view class="u-font-lg">商品名称</view>
-            <view class="u-type-info u-font-sm">已售 10/剩余 128</view>
-            <view class="u-font-xs u-type-error-dark" v-for="r in 2" :key="r"
-              >促销规则</view
+            <view class="u-font-lg">{{ item.title }}</view>
+            <view class="u-type-info u-font-sm"
+              >已售 {{ item.sale }}/剩余 {{ item.stock }}</view
             >
+            <block>
+              <view
+                class="u-font-xs u-type-error-dark"
+                v-for="(rule, ruleIndex) in item.ruleList"
+                :key="ruleIndex"
+                >{{ rule }}</view
+              >
+            </block>
           </view>
           <view class="u-flex u-row-between">
             <view class="u-type-error gg-product-item-msg-price">
               <text>￥</text>
-              <text class="gg-product-item-msg-price-value">125</text>
+              <text class="gg-product-item-msg-price-value">{{
+                item.price
+              }}</text>
             </view>
             <AddToCart></AddToCart>
           </view>
@@ -245,7 +268,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -283,6 +306,16 @@ export default {
     // 将仓库的数据进行映射
     ...mapActions("indexModule", ["getHomeIndex"]),
   },
+  computed: {
+    ...mapGetters("indexModule", [
+      "categoryList",
+      "leaderAddressVo",
+      "hotSkuList",
+      "newPersonSkuInfoList",
+      "seckillTime",
+      "seckillSkuVoList",
+    ]),
+  },
   onLoad() {
     // 获取设备的宽度
     uni.getSystemInfo({
@@ -304,6 +337,7 @@ export default {
     }
     // 调用首页商品列表数据
     await this.getHomeIndex();
+    console.log(this.home);
   },
 };
 </script>

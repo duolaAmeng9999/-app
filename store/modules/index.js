@@ -17,7 +17,30 @@ const state = {
 	home: {}
 }
 // 获取内容
-const getters = {}
+const getters = {
+	categoryList(state) { // 商品分类
+		return state.home.categoryList || [];
+	},
+	hotSkuList(state) { // 热销商品
+		return state.home.hotSkuList || [];
+	},
+	leaderAddressVo(state) { // 提货点
+		return state.home.leaderAddress || [];
+	},
+	newPersonSkuInfoList(state) { // 新人专享
+		return state.home.newPersonSkuInfoList || [];
+	},
+
+	seckillTime(state) { // 秒杀时间
+		return state.home.seckillTime || {}
+	},
+
+	seckillSkuVoList(state) { // 秒杀商品列表
+		return state.home.seckillSkuVoList || []
+	}
+
+
+}
 
 
 export default {
