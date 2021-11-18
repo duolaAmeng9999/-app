@@ -1,5 +1,7 @@
 <template>
-  <view> 分包 </view>
+  <view>
+    <PickupLocationHeader></PickupLocationHeader>
+  </view>
 </template>
 
 <script>

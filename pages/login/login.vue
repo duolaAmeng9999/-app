@@ -1,4 +1,4 @@
-<template>
+  <template>
   <view class="wrap">
     <view class="content"><view class="title">欢迎登陆硅谷团购平台</view></view>
     <view class="buttom">
