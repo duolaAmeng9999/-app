@@ -3,7 +3,7 @@
     <view>
       <!-- 导航头 -->
       <u-navbar :is-back="false" title="hello！文静" :background="background">
-        <view class="gg-map-slot-wrap">
+        <view class="gg-map-slot-wrap" @click="pickUpLocation">
           <u-icon name="map" size="24"></u-icon>
           <text class="u-p-l-10 u-p-r-10">{{
             leaderAddressVo.takeName ? leaderAddressVo.takeName : "请设置提货点"
@@ -302,6 +302,16 @@ export default {
       this.$u.debounce(() => {
         this.categorySVPercent = percent;
       }, 100);
+    },
+    // 跳转至提货地点的选择
+    pickUpLocation() {
+      /* // 无参数
+      this.$u.route({
+        url: "/pagesLocation/myPickUpLocation/myPickUpLocation",
+      }); */
+      uni.navigateTo({
+        url: "/pagesLocation/myPickUpLocation/myPickUpLocation",
+      });
     },
     // 将仓库的数据进行映射
     ...mapActions("indexModule", ["getHomeIndex"]),

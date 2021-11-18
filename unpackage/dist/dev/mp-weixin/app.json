@@ -1,54 +1,62 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/categories/categories",
-    "pages/cart/cart",
-    "pages/my/my",
-    "pages/login/login"
-  ],
-  "subPackages": [],
-  "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-    "color": "#6d4369",
-    "selectedColor": "#ad697e",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "static/images/tabbar/home.png",
-        "selectedIconPath": "static/images/tabbar/home-selected.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/categories/categories",
-        "iconPath": "static/images/tabbar/categories.png",
-        "selectedIconPath": "static/images/tabbar/categories-selected.png",
-        "text": "商品分类"
-      },
-      {
-        "pagePath": "pages/cart/cart",
-        "iconPath": "static/images/tabbar/cart.png",
-        "selectedIconPath": "static/images/tabbar/cart-selected.png",
-        "text": "购物车"
-      },
-      {
-        "pagePath": "pages/my/my",
-        "iconPath": "static/images/tabbar/my.png",
-        "selectedIconPath": "static/images/tabbar/my-selected.png",
-        "text": "个人中心"
-      }
-    ]
-  },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "余生请多多指教！文静"
-    }
-  },
-  "usingComponents": {}
+    "pages": [
+        "pages/index/index",
+        "pages/categories/categories",
+        "pages/cart/cart",
+        "pages/my/my",
+        "pages/login/login"
+    ],
+    "subPackages": [
+        {
+            "root": "pagesLocation",
+            "pages": [
+                "myPickUpLocation/myPickUpLocation"
+            ]
+        }
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "tabBar": {
+        "color": "#6d4369",
+        "selectedColor": "#ad697e",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "static/images/tabbar/home.png",
+                "selectedIconPath": "static/images/tabbar/home-selected.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/categories/categories",
+                "iconPath": "static/images/tabbar/categories.png",
+                "selectedIconPath": "static/images/tabbar/categories-selected.png",
+                "text": "商品分类"
+            },
+            {
+                "pagePath": "pages/cart/cart",
+                "iconPath": "static/images/tabbar/cart.png",
+                "selectedIconPath": "static/images/tabbar/cart-selected.png",
+                "text": "购物车"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "iconPath": "static/images/tabbar/my.png",
+                "selectedIconPath": "static/images/tabbar/my-selected.png",
+                "text": "个人中心"
+            }
+        ]
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "余生请多多指教！文静"
+        }
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap.json"
 }
