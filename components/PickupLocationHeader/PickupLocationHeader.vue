@@ -6,12 +6,13 @@
     </view>
     <!-- 利用v-model操作，会造成searchKeyword对于父组件的二次重渲染问题 -->
     <u-search
-      v-model="searchKeyword"
       class="gg-header-search"
       input-align="left"
       height="70"
       :clearabled="false"
       :show-action="true"
+      @search="search"
+      @custom="search"
     ></u-search>
     <!-- 复制多列对象模式 -->
     <u-picker
@@ -64,6 +65,29 @@ export default {
           });
         },
       });
+    },
+    // 搜索框事件回调
+    search(value) {
+      if (value && value.trim().length > 0) {
+        // 发起geocoding检索请求
+        BMap.geocoding({
+          address: value,
+          fail: (error) => {
+            console.log(error);
+          },
+          success: (data) => {
+            let wxMarkerData = data.wxMarkerData;
+            this.latitude = wxMarkerData[0].latitude; // 纬度等于地点的纬度
+            this.longitude = wxMarkerData[0].longitude; // 经度等于地点的经度
+            // 将经纬度通过自定义事件子传父; 通过父组件查询数据
+            this.$emit("getSearchLeader", {
+              location: this.latitude,
+              longitude: this.longitude,
+            });
+            console.log(this.latitude, this.longitude);
+          },
+        });
+      }
     },
   },
   computed: {

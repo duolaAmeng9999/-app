@@ -1,6 +1,7 @@
 const pickUpLocation = {
     namespaced: true,
     actions: {
+        // 提货点接口
         async getSysRegionFindAllList(context) {
             const result = await this._vm.$u.api.getSysRegionFindAllList();
             await context.commit("GET_SYS_REGION_FINDALL_LIST", result);
@@ -9,6 +10,7 @@ const pickUpLocation = {
 
     },
     mutations: {
+        // 提货点信息
         GET_SYS_REGION_FINDALL_LIST(state, result) {
             state.findAllList = result;
         },
