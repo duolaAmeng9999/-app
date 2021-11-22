@@ -946,7 +946,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7611,7 +7611,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7632,14 +7632,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7725,7 +7725,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"wenjing","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8751,7 +8751,7 @@ var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 13));
 
 var _index = _interopRequireDefault(__webpack_require__(/*! ./modules/index */ 14));
 
-var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 18));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 引入分仓库
+var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 引入分仓库
 // 使用第三方插件来将仓库的数据进行本地化存储 
 _vue.default.use(_vuex.default);var _default =
 
@@ -10878,7 +10878,8 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 18 */
+/* 18 */,
+/* 19 */
 /*!***************************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
   \***************************************************************************************************/
@@ -10889,7 +10890,7 @@ if (hadRuntime) {
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var r = function r(_r) {return function (r) {return !!r && "object" == typeof r;}(_r) && !function (r) {var t = Object.prototype.toString.call(r);return "[object RegExp]" === t || "[object Date]" === t || function (r) {return r.$$typeof === e;}(r);}(_r);},e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;function t(r, e) {return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;}function n(r, e, n) {return r.concat(e).map(function (r) {return t(r, n);});}function o(r) {return Object.keys(r).concat(function (r) {return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {return r.propertyIsEnumerable(e);}) : [];}(r));}function c(r, e) {try {return e in r;} catch (r) {return !1;}}function u(e, i, a) {(a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;var f = Array.isArray(i);return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {var i = {};return n.isMergeableObject(r) && o(r).forEach(function (e) {i[e] = t(r[e], n);}), o(e).forEach(function (o) {(function (r, e) {return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));})(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {if (!e.customMerge) return u;var t = e.customMerge(r);return "function" == typeof t ? t : u;}(o, n)(r[o], e[o], n) : t(e[o], n));}), i;}(e, i, a) : t(i, a);}u.all = function (r, e) {if (!Array.isArray(r)) throw new Error("first argument should be an array");return r.reduce(function (r, t) {return u(r, t, e);}, {});};var i = u;function a(r) {var e = (r = r || {}).storage || window && window.localStorage,t = r.key || "vuex";function n(r, e) {var t = e.getItem(r);try {return "string" == typeof t ? JSON.parse(t) : "object" == typeof t ? t : void 0;} catch (r) {}}function o() {return !0;}function c(r, e, t) {return t.setItem(r, JSON.stringify(e));}function u(r, e) {return Array.isArray(e) ? e.reduce(function (e, t) {return function (r, e, t, n) {return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {return r[e] = r[e] || {};}, r)[e.pop()] = t), r;}(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {return r && r[e];}, n)) ? void 0 : n));var n, o;}, {}) : r;}function a(r) {return function (e) {return r.subscribe(e);};}(r.assertStorage || function () {e.setItem("@@", 1), e.removeItem("@@");})(e);var f,s = function s() {return (r.getState || n)(t, e);};return r.fetchBeforeUse && (f = s()), function (n) {r.fetchBeforeUse || (f = s()), "object" == typeof f && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, { arrayMerge: r.arrayMerger || function (r, e) {return e;}, clone: !1 })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {(r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);});};}var _default = a;exports.default = _default;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /*!******************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/index.js ***!
   \******************************************************************/
@@ -10898,15 +10899,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 20));
+var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 21));
 
 
 
-var _request = _interopRequireDefault(__webpack_require__(/*! ./libs/request */ 21));
-
-
-
-
+var _request = _interopRequireDefault(__webpack_require__(/*! ./libs/request */ 22));
 
 
 
@@ -10923,56 +10920,60 @@ var _request = _interopRequireDefault(__webpack_require__(/*! ./libs/request */ 
 
 
 
-var _queryParams = _interopRequireDefault(__webpack_require__(/*! ./libs/function/queryParams.js */ 25));
-
-var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/function/route.js */ 26));
-
-var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFormat.js */ 27));
-
-var _timeFrom = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFrom.js */ 28));
-
-var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 29));
-
-var _guid = _interopRequireDefault(__webpack_require__(/*! ./libs/function/guid.js */ 30));
-
-var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/function/color.js */ 31));
-
-var _type2icon = _interopRequireDefault(__webpack_require__(/*! ./libs/function/type2icon.js */ 32));
-
-var _randomArray = _interopRequireDefault(__webpack_require__(/*! ./libs/function/randomArray.js */ 33));
-
-var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepClone.js */ 23));
-
-var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepMerge.js */ 22));
-
-var _addUnit = _interopRequireDefault(__webpack_require__(/*! ./libs/function/addUnit.js */ 34));
-
-
-var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 24));
-
-var _random = _interopRequireDefault(__webpack_require__(/*! ./libs/function/random.js */ 35));
-
-var _trim = _interopRequireDefault(__webpack_require__(/*! ./libs/function/trim.js */ 36));
-
-var _toast = _interopRequireDefault(__webpack_require__(/*! ./libs/function/toast.js */ 37));
-
-var _getParent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/getParent.js */ 38));
-
-var _$parent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/$parent.js */ 39));
 
 
 
-var _sys = __webpack_require__(/*! ./libs/function/sys.js */ 40);
 
-var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 41));
+var _queryParams = _interopRequireDefault(__webpack_require__(/*! ./libs/function/queryParams.js */ 26));
 
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 42));
+var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/function/route.js */ 27));
+
+var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFormat.js */ 28));
+
+var _timeFrom = _interopRequireDefault(__webpack_require__(/*! ./libs/function/timeFrom.js */ 29));
+
+var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 30));
+
+var _guid = _interopRequireDefault(__webpack_require__(/*! ./libs/function/guid.js */ 31));
+
+var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/function/color.js */ 32));
+
+var _type2icon = _interopRequireDefault(__webpack_require__(/*! ./libs/function/type2icon.js */ 33));
+
+var _randomArray = _interopRequireDefault(__webpack_require__(/*! ./libs/function/randomArray.js */ 34));
+
+var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepClone.js */ 24));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ./libs/function/deepMerge.js */ 23));
+
+var _addUnit = _interopRequireDefault(__webpack_require__(/*! ./libs/function/addUnit.js */ 35));
+
+
+var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 25));
+
+var _random = _interopRequireDefault(__webpack_require__(/*! ./libs/function/random.js */ 36));
+
+var _trim = _interopRequireDefault(__webpack_require__(/*! ./libs/function/trim.js */ 37));
+
+var _toast = _interopRequireDefault(__webpack_require__(/*! ./libs/function/toast.js */ 38));
+
+var _getParent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/getParent.js */ 39));
+
+var _$parent = _interopRequireDefault(__webpack_require__(/*! ./libs/function/$parent.js */ 40));
 
 
 
-var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 43));
+var _sys = __webpack_require__(/*! ./libs/function/sys.js */ 41);
 
-var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 44));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 引入全局mixin
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 42));
+
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 43));
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 44));
+
+var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 45));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // 引入全局mixin
 // 引入关于是否mixin集成小程序分享的配置
 // import wxshare from './libs/mixin/mpShare.js'
 // 全局挂载引入http相关请求拦截插件
@@ -11040,7 +11041,7 @@ var install = function install(Vue) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /*!*****************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/mixin/mixin.js ***!
   \*****************************************************************************/
@@ -11113,7 +11114,7 @@ var install = function install(Vue) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /*!*******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/request/index.js ***!
   \*******************************************************************************/
@@ -11121,8 +11122,8 @@ var install = function install(Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../function/deepMerge */ 22));
-var _test = _interopRequireDefault(__webpack_require__(/*! ../function/test */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../function/deepMerge */ 23));
+var _test = _interopRequireDefault(__webpack_require__(/*! ../function/test */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}var
 Request = /*#__PURE__*/function () {_createClass(Request, [{ key: "setConfig",
     // 设置全局默认配置
     value: function setConfig(customConfig) {
@@ -11293,7 +11294,7 @@ new Request();exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 22 */
+/* 23 */
 /*!************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/deepMerge.js ***!
   \************************************************************************************/
@@ -11301,7 +11302,7 @@ new Request();exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./deepClone */ 23));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _deepClone = _interopRequireDefault(__webpack_require__(/*! ./deepClone */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 // JS对象深度合并
 function deepMerge() {var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -11333,7 +11334,7 @@ function deepMerge() {var target = arguments.length > 0 && arguments[0] !== unde
 deepMerge;exports.default = _default;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /*!************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/deepClone.js ***!
   \************************************************************************************/
@@ -11366,7 +11367,7 @@ function deepClone(obj) {
 deepClone;exports.default = _default;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /*!*******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/test.js ***!
   \*******************************************************************************/
@@ -11607,7 +11608,7 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
   code: code };exports.default = _default;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /*!**************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/queryParams.js ***!
   \**************************************************************************************/
@@ -11675,7 +11676,7 @@ function queryParams() {var data = arguments.length > 0 && arguments[0] !== unde
 queryParams;exports.default = _default;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /*!********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/route.js ***!
   \********************************************************************************/
@@ -11808,7 +11809,7 @@ new Router().route;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /*!*************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/timeFormat.js ***!
   \*************************************************************************************/
@@ -11869,7 +11870,7 @@ function timeFormat() {var dateTime = arguments.length > 0 && arguments[0] !== u
 timeFormat;exports.default = _default;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /*!***********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/timeFrom.js ***!
   \***********************************************************************************/
@@ -11877,7 +11878,7 @@ timeFormat;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ../../libs/function/timeFormat.js */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ../../libs/function/timeFormat.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 /**
                                                                                                                                                                                                                                                                                           * 时间戳转为多久之前
@@ -11926,7 +11927,7 @@ function timeFrom() {var dateTime = arguments.length > 0 && arguments[0] !== und
 timeFrom;exports.default = _default;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /*!****************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/colorGradient.js ***!
   \****************************************************************************************/
@@ -12069,7 +12070,7 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
   colorToRgba: colorToRgba };exports.default = _default;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /*!*******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/guid.js ***!
   \*******************************************************************************/
@@ -12120,7 +12121,7 @@ function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? 
 guid;exports.default = _default;
 
 /***/ }),
-/* 31 */
+/* 32 */
 /*!********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/color.js ***!
   \********************************************************************************/
@@ -12167,7 +12168,7 @@ var color = {
 color;exports.default = _default;
 
 /***/ }),
-/* 32 */
+/* 33 */
 /*!************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/type2icon.js ***!
   \************************************************************************************/
@@ -12212,7 +12213,7 @@ function type2icon() {var type = arguments.length > 0 && arguments[0] !== undefi
 type2icon;exports.default = _default;
 
 /***/ }),
-/* 33 */
+/* 34 */
 /*!**************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/randomArray.js ***!
   \**************************************************************************************/
@@ -12229,7 +12230,7 @@ function randomArray() {var array = arguments.length > 0 && arguments[0] !== und
 randomArray;exports.default = _default;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /*!**********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/addUnit.js ***!
   \**********************************************************************************/
@@ -12237,7 +12238,7 @@ randomArray;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = addUnit;var _test = _interopRequireDefault(__webpack_require__(/*! ./test.js */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = addUnit;var _test = _interopRequireDefault(__webpack_require__(/*! ./test.js */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 // 添加单位，如果有rpx，%，px等单位结尾或者值为auto，直接返回，否则加上rpx单位结尾
 function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'auto';var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'rpx';
@@ -12247,7 +12248,7 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /*!*********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/random.js ***!
   \*********************************************************************************/
@@ -12267,7 +12268,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 random;exports.default = _default;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /*!*******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/trim.js ***!
   \*******************************************************************************/
@@ -12292,7 +12293,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 trim;exports.default = _default;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /*!********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/toast.js ***!
   \********************************************************************************/
@@ -12312,7 +12313,7 @@ toast;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /*!************************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/getParent.js ***!
   \************************************************************************************/
@@ -12369,7 +12370,7 @@ function getParent(name, keys) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /*!**********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/$parent.js ***!
   \**********************************************************************************/
@@ -12397,7 +12398,7 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 }
 
 /***/ }),
-/* 40 */
+/* 41 */
 /*!******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/sys.js ***!
   \******************************************************************************/
@@ -12415,7 +12416,7 @@ function sys() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 41 */
+/* 42 */
 /*!***********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/debounce.js ***!
   \***********************************************************************************/
@@ -12454,7 +12455,7 @@ function debounce(func) {var wait = arguments.length > 1 && arguments[1] !== und
 debounce;exports.default = _default;
 
 /***/ }),
-/* 42 */
+/* 43 */
 /*!***********************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/function/throttle.js ***!
   \***********************************************************************************/
@@ -12496,7 +12497,7 @@ function throttle(func) {var wait = arguments.length > 1 && arguments[1] !== und
 throttle;exports.default = _default;
 
 /***/ }),
-/* 43 */
+/* 44 */
 /*!*******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/config/config.js ***!
   \*******************************************************************************/
@@ -12519,7 +12520,7 @@ var version = '1.8.3';var _default =
   'warning'] };exports.default = _default;
 
 /***/ }),
-/* 44 */
+/* 45 */
 /*!*******************************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/node_modules/uview-ui/libs/config/zIndex.js ***!
   \*******************************************************************************/
@@ -12548,7 +12549,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   indexListSticky: 965 };exports.default = _default;
 
 /***/ }),
-/* 45 */
+/* 46 */
 /*!**************************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/common/http.interceptor.js ***!
   \**************************************************************/
@@ -12595,7 +12596,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 46 */
+/* 47 */
 /*!******************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/common/http.api.js ***!
   \******************************************************/
@@ -12603,7 +12604,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _const = __webpack_require__(/*! ./const.js */ 47);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _const = __webpack_require__(/*! ./const.js */ 48);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var get_baidu_map_address = "https://api.map.baidu.com/reverse_geocoding/v3/?output=json&ak=".concat(_const.BAIDU_MAP_WEB_AK, "&coordtype=wgs84ll&location="); // 通过经纬度获取地址信息
 var get_home_index = 'home/index'; // 获取首页数据
 var get_sys_region_find_all_list = '/sys/region/findAllList'; // 查询所有提供点的区域
@@ -12780,7 +12781,7 @@ var install = function install(Vue, vm) {
   install: install };exports.default = _default;
 
 /***/ }),
-/* 47 */
+/* 48 */
 /*!***************************************************!*\
   !*** D:/weixin/uin-app初始/wenjing/common/const.js ***!
   \***************************************************/
