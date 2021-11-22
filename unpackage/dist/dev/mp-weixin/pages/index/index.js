@@ -489,6 +489,16 @@ var _vuex = __webpack_require__(/*! vuex */ 13);function _interopRequireDefault(
       this.$u.debounce(function () {
         _this.categorySVPercent = percent;
       }, 100);
+    },
+    // 跳转至提货地点的选择
+    pickUpLocation: function pickUpLocation() {
+      /* // 无参数
+                                               this.$u.route({
+                                                 url: "/pagesLocation/myPickUpLocation/myPickUpLocation",
+                                               }); */
+      uni.navigateTo({
+        url: "/pagesLocation/myPickUpLocation/myPickUpLocation" });
+
     } },
 
   (0, _vuex.mapActions)("indexModule", ["getHomeIndex"])),
@@ -523,8 +533,7 @@ var _vuex = __webpack_require__(/*! vuex */ 13);function _interopRequireDefault(
 
 
 
-                _this3.getHomeIndex());case 11:
-              console.log(_this3.home);case 12:case "end":return _context.stop();}}}, _callee);}))();
+                _this3.getHomeIndex());case 11:case "end":return _context.stop();}}}, _callee);}))();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

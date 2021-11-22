@@ -3,7 +3,7 @@
     <view>
       <!-- 导航头 -->
       <u-navbar :is-back="false" title="hello！文静" :background="background">
-        <view class="gg-map-slot-wrap">
+        <view class="gg-map-slot-wrap" @click="pickUpLocation">
           <u-icon name="map" size="24"></u-icon>
           <text class="u-p-l-10 u-p-r-10">{{
             leaderAddressVo.takeName ? leaderAddressVo.takeName : "请设置提货点"
@@ -69,7 +69,7 @@
         class="u-flex u-row-between u-p-20 u-m-20 gg-border"
         @click="show = true"
       >
-        <u-image src="/static/logo.png" width="30rpx" height="30rpx"></u-image>
+        <u-image src="/static/images/location.png" width="30rpx" height="30rpx"></u-image>
         <view>平台资质、法律条款、规则及投诉入口</view>
       </view>
       <!-- 平台法律规则 -->
@@ -303,6 +303,16 @@ export default {
         this.categorySVPercent = percent;
       }, 100);
     },
+    // 跳转至提货地点的选择
+    pickUpLocation() {
+      /* // 无参数
+      this.$u.route({
+        url: "/pagesLocation/myPickUpLocation/myPickUpLocation",
+      }); */
+      uni.navigateTo({
+        url: "/pagesLocation/myPickUpLocation/myPickUpLocation",
+      });
+    },
     // 将仓库的数据进行映射
     ...mapActions("indexModule", ["getHomeIndex"]),
   },
@@ -337,7 +347,6 @@ export default {
     }
     // 调用首页商品列表数据
     await this.getHomeIndex();
-    console.log(this.home);
   },
 };
 </script>

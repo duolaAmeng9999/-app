@@ -6,7 +6,14 @@
     "pages/my/my",
     "pages/login/login"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pagesLocation",
+      "pages": [
+        "myPickUpLocation/myPickUpLocation"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
