@@ -1,7 +1,6 @@
 <template>
   <view>
     <PickupLocationHeader
-      :searchKeyword="searchKeyword"
       @getSearchLeader="getSearchLeader"
     ></PickupLocationHeader>
   </view>
@@ -18,7 +17,6 @@ export default {
   methods: {
     // 自定义事件接受子组件传递过来的经纬度数据
     getSearchLeader({ location, longitude }) {
-      console.log(location, longitude);
     },
   },
 };
