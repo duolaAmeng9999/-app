@@ -2,8 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 // 引入分仓库
 import indexModule from './modules/index'
+import pickUpLocation from "./modules/pickUpLocation"
 // 使用第三方插件来将仓库的数据进行本地化存储 
 import createPersistedState from "vuex-persistedstate";
+
 
 Vue.use(Vuex);
 
@@ -22,5 +24,6 @@ export default new Vuex.Store({
 	],
 	modules: {
 		indexModule,
+		pickUpLocation
 	},
 })

@@ -69,7 +69,7 @@
         class="u-flex u-row-between u-p-20 u-m-20 gg-border"
         @click="show = true"
       >
-        <u-image src="/static/logo.png" width="30rpx" height="30rpx"></u-image>
+        <u-image src="/static/images/location.png" width="30rpx" height="30rpx"></u-image>
         <view>平台资质、法律条款、规则及投诉入口</view>
       </view>
       <!-- 平台法律规则 -->
@@ -347,7 +347,6 @@ export default {
     }
     // 调用首页商品列表数据
     await this.getHomeIndex();
-    console.log(this.home);
   },
 };
 </script>
