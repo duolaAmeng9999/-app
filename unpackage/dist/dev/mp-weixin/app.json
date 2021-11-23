@@ -10,7 +10,8 @@
     {
       "root": "pagesLocation",
       "pages": [
-        "myPickUpLocation/myPickUpLocation"
+        "myPickUpLocation/myPickUpLocation",
+        "pickUpLocationItem/pickUpLocationItem"
       ]
     }
   ],

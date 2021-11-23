@@ -3492,7 +3492,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var actions = {
   getHomeIndex: function getHomeIndex(context) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 _this._vm.$u.api.getHomeIndex());case 2:result = _context.sent;
-              context.commit("GETHOMEINDEX", result);case 4:case "end":return _context.stop();}}}, _callee);}))();
+              context.commit("GETHOMEINDEX", result);
+              // 查看当前提货点的信息;  root: true 它允许在命名空间模块里分发根的 action。返回一个解析所有被触发的 action 处理器的 Promise。
+              context.dispatch("pickUpLocation/changeLeaderAddressVo", result.leaderAddressVo, { root: true });case 5:case "end":return _context.stop();}}}, _callee);}))();
   } };
 
 // 修改数据
@@ -4361,21 +4363,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
                   _this._vm.$u.api.getSysRegionFindAllList());case 2:result = _context.sent;_context.next = 5;return (
                   context.commit("GET_SYS_REGION_FINDALL_LIST", result));case 5:_context.next = 7;return (
                   context.commit("CURRENTPICKUPAREA", result));case 7:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    // 当前提货点
+    changeLeaderAddressVo: function changeLeaderAddressVo(context, result) {
+      context.commit("CHANGE_LEADER_ADDRESS_VO", result);
     } },
-
 
   mutations: {
     // 提货点信息
     GET_SYS_REGION_FINDALL_LIST: function GET_SYS_REGION_FINDALL_LIST(state, result) {
       state.findAllList = result;
     },
-    CURRENTPICKUPAREA: function CURRENTPICKUPAREA(state, result) {// 设置默认提货点
+    // 设置默认提货点
+    CURRENTPICKUPAREA: function CURRENTPICKUPAREA(state, result) {
       state.currentPickUpArea = result[0].regionName;
+    },
+    // 修改当前提货点
+    CHANGE_LEADER_ADDRESS_VO: function CHANGE_LEADER_ADDRESS_VO(state, result) {
+      state.leaderAddressVo = result;
     } },
 
   state: {
     currentPickUpArea: "", // 当前提货点
-    findAllList: [] // 指定提货点区域列表
+    findAllList: [], // 指定提货点区域列表
+    leaderAddressVo: "" // 当前提货点
   },
   getters: {} };var _default =
 
