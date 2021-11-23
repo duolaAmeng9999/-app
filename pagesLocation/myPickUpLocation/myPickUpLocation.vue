@@ -1,10 +1,10 @@
 <template>
-  <view>
+  <view class="gg u-p-20">
     <PickupLocationHeader
       @getSearchLeader="getSearchLeader"
     ></PickupLocationHeader>
-    <view v-if="leaderAddressVo" class="gg-current-location-container">
-      <PickUplocationItem :location="leaderAddressVo"> </PickUplocationItem>
+    <view v-if="leaderAddressVo" class="gg-current-location-container u-m-t-20">
+      <PickUpLocationItem :location="leaderAddressVo"> </PickUpLocationItem>
     </view>
     <scroll-view
       scroll-y
@@ -14,10 +14,12 @@
       <block v-if="searchResult.content.length > 0">
         <view
           class="u-m-b-20"
-          v-for="(item, index) in searchResult.content"
+          v-for="item in searchResult.content"
           :key="item.id"
-          ><PickUpLocationItem :location="item"></PickUpLocationItem
-        ></view>
+        >
+          {{ item.detailAddress }}
+          <PickUpLocationItem :location="item"></PickUpLocationItem>
+        </view>
       </block>
       <u-empty mode="list" v-else></u-empty>
     </scroll-view>
@@ -44,10 +46,12 @@ export default {
   },
   methods: {
     // 自定义事件接受子组件传递过来的经纬度数据; 来获取提货点的信息
-    async getSearchLeader({ latitude, longitude }) {
+    async getSearchLeader(data) {
       // 数据收并赋值于 data 中的数据
-      this.filter.latitude = latitude ? latitude : this.filter.latitude;
-      this.filter.longitude = longitude ? longitude : this.filter.longitude;
+      /*  this.filter.latitude = latitude ? latitude : this.filter.latitude;
+      this.filter.longitude = longitude ? longitude : this.filter.longitude; */
+      this.filter.latitude = data ? data.latitude : this.filter.latitude;
+      this.filter.longitude = data ? data.longitude : this.filter.longitude;
       // 整理后台接口需要返沪的数据
       let object = {
         latitude: this.filter.latitude,
@@ -55,12 +59,20 @@ export default {
         page: this.filter.page,
         limit: this.filter.limit,
       };
+      console.log(object);
       // 调用提货点接口
       let result = await this.$u.api.getSearchLeader(object);
+
       this.searchResult = {
         ...result,
         content: [...this.searchResult.content, ...result.content],
       };
+    },
+    loadMore() {
+      if (!this.searchResult.last) {
+        this.filter.page += 1;
+        this.getSearchLeader();
+      }
     },
   },
   computed: {
@@ -68,6 +80,19 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
+.gg {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  &-current-location-container {
+    flex: 1;
+  }
+
+  &-location-sv-container {
+    height: calc(100vh - 450rpx);
+  }
+}
 </style>

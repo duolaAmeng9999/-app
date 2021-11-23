@@ -52,7 +52,7 @@ export default {
     findAllListConfirm(index) {
       // 发起geocoding检索请求
       BMap.geocoding({
-        address: this.findAllList[index],
+        address: this.findAllList[index].regionName,
         fail: (error) => {
           console.log(error);
         },
