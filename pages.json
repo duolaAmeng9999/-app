@@ -46,8 +46,7 @@
 		"selectedColor": "#ad697e",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [
-			{
+		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/images/tabbar/home.png",
 				"selectedIconPath": "static/images/tabbar/home-selected.png",
@@ -79,26 +78,26 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"subPackages": [
-		{
-			"root": "pagesLocation",
-			"pages": [
-				// 我的提货点
-				{
-					"path": "myPickUpLocation/myPickUpLocation",
-					"style": {
-						"navigationBarTitleText": "我的提货点",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "pickUpLocationItem/pickUpLocationItem",
-					"style": {
-						"navigationBarTitleText": "我的提货点",
-						"enablePullDownRefresh": false
-					}
+	"subPackages": [{
+		"root": "pagesLocation",
+		"pages": [
+			// 我的提货点
+			{
+				"path": "myPickUpLocation/myPickUpLocation",
+				"style": {
+					"navigationBarTitleText": "我的提货点",
+					"enablePullDownRefresh": false
 				}
-			]
-		}
-	]
+			}
+		    ,{
+                    "path" : "PickUpLocationItem/PickUpLocationItem",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+	}]
 }

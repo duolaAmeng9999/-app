@@ -62,7 +62,7 @@ export default {
           this.longitude = wxMarkerData[0].longitude; // 经度等于地点的经度
           // 将经纬度通过自定义事件子传父; 通过父组件查询数据
           this.$emit("getSearchLeader", {
-            location: this.latitude,
+            latitude: this.latitude,
             longitude: this.longitude,
           });
         },
@@ -83,7 +83,7 @@ export default {
             this.longitude = wxMarkerData[0].longitude; // 经度等于地点的经度
             // 将经纬度通过自定义事件子传父; 通过父组件查询数据
             this.$emit("getSearchLeader", {
-              location: this.latitude,
+              latitude: this.latitude,
               longitude: this.longitude,
             });
           },
@@ -104,7 +104,6 @@ export default {
   mounted() {
     // 获取提货点接口函数
     this.getSysRegionFindAllList();
-    console.log(this.leaderAddressVo);
   },
 };
 </script>
