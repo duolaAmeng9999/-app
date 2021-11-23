@@ -3,6 +3,8 @@ const actions = {
 	async getHomeIndex(context) {
 		let result = await this._vm.$u.api.getHomeIndex();
 		context.commit("GETHOMEINDEX", result)
+		// 查看当前提货点的信息;  root: true 它允许在命名空间模块里分发根的 action。返回一个解析所有被触发的 action 处理器的 Promise。
+		context.dispatch("pickUpLocation/changeLeaderAddressVo", result.leaderAddressVo, { root: true })
 	}
 }
 // 修改数据

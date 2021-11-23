@@ -3,10 +3,15 @@
     <PickupLocationHeader
       @getSearchLeader="getSearchLeader"
     ></PickupLocationHeader>
+    <view v-if="!leaderAddressVo" class="gg-current-location-container">
+      <PickupLocationHeader :location="leaderAddressVo"> </PickupLocationHeader>
+    </view>
+    
   </view>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "myPickUpLocation",
   data() {
@@ -16,8 +21,10 @@ export default {
   },
   methods: {
     // 自定义事件接受子组件传递过来的经纬度数据
-    getSearchLeader({ location, longitude }) {
-    },
+    getSearchLeader({ location, longitude }) {},
+  },
+  computed: {
+    ...mapState("pickUpLocation", ["leaderAddressVo"]),
   },
 };
 </script>

@@ -11,6 +11,8 @@
       height="70"
       :clearabled="false"
       :show-action="true"
+      :value="searchKeyword"
+      @blur="blurSearch"
       @search="search"
       @custom="search"
     ></u-search>
@@ -66,7 +68,7 @@ export default {
         },
       });
     },
-    // 搜索框事件回调
+    // 搜索框事件回调; 将搜索地点关键字转换为经纬度
     search(value) {
       if (value && value.trim().length > 0) {
         // 发起geocoding检索请求
@@ -84,18 +86,25 @@ export default {
               location: this.latitude,
               longitude: this.longitude,
             });
-            console.log(this.latitude, this.longitude);
           },
         });
       }
     },
+    blurSearch(value) {
+      this.$emit("update: searchKeyword", value);
+    },
   },
   computed: {
-    ...mapState("pickUpLocation", ["findAllList", "currentPickUpArea"]),
+    ...mapState("pickUpLocation", [
+      "findAllList",
+      "currentPickUpArea",
+      "leaderAddressVo",
+    ]),
   },
   mounted() {
     // 获取提货点接口函数
     this.getSysRegionFindAllList();
+    console.log(this.leaderAddressVo);
   },
 };
 </script>

@@ -90,6 +90,13 @@
 						"navigationBarTitleText": "我的提货点",
 						"enablePullDownRefresh": false
 					}
+				},
+				{
+					"path": "pickUpLocationItem/pickUpLocationItem",
+					"style": {
+						"navigationBarTitleText": "我的提货点",
+						"enablePullDownRefresh": false
+					}
 				}
 			]
 		}
