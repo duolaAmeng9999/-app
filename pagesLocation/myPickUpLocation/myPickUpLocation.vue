@@ -31,6 +31,9 @@
       </block>
       <u-empty mode="list" v-else></u-empty>
     </scroll-view>
+    <u-button @click="otherPickUpLocation" type="warning"
+      >搜索并选择其它提货点</u-button
+    >
   </view>
 </template>
 
@@ -89,9 +92,16 @@ export default {
     // 自定义事件的回调函数; 将子组件到的所选中的提货点的 id 传父组件; 进行接口的调用
     selectPickUpLocation(leaderId) {
       if (leaderId) {
-        // 调用选择提货点接口传入所选中的 id 
+        // 调用选择提货点接口传入所选中的 id
         return this.getSelectLeader({ leaderId });
       }
+    },
+    // 点击按钮跳转到其他提货点
+    otherPickUpLocation() {
+      // 跳转到其他页面并可以返回
+      uni.navigateTo({
+        url: "/pagesLocation/otherPickUpLocation/otherPickUpLocation",
+      });
     },
   },
   computed: {

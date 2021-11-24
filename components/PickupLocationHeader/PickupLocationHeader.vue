@@ -95,7 +95,8 @@ export default {
       }
     },
     blurSearch(value) {
-      this.$emit("update: searchKeyword", value);
+      console.log(value);
+      this.$emit("update:searchKeyword", value);
     },
   },
   computed: {
@@ -104,6 +105,16 @@ export default {
       "currentPickUpArea",
       "leaderAddressVo",
     ]),
+  },
+  // 对 searchKeyword 进行监视
+  watch: {
+    searchKeyword: {
+      handler(newValue) {
+        // 根据关键字调用接口, 地图上查找
+        this.search(newValue);
+      },
+      immediate: true,
+    },
   },
   mounted() {
     // 获取提货点接口函数
