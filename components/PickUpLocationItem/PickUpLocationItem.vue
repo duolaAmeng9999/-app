@@ -56,12 +56,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    // 提货点数据; 从父组件传过来
     location: {
       type: Object,
       default: () => {
         return {};
       },
     },
+    // 是否为当前提货点; 数据来自父组件
     isCurrent: {
       type: Boolean,
       default: true,
@@ -72,12 +74,13 @@ export default {
     },
   },
   methods: {
+    /* 
+        组件之间的通信: 子传父
+        通过自定义事件将所选中的提货点 id 传给父组件
+    */
     changePickUpLocation(id) {
       this.$emit("selectPickUpLocation", id);
     },
-  },
-  mounted() {
-    console.log(this.isCurrent);
   },
 };
 </script>

@@ -6,7 +6,7 @@
     <view v-if="leaderAddressVo" class="gg-current-location-container u-m-t-20">
       <PickUpLocationItem
         :location="leaderAddressVo"
-        :current="checkIsCurrent(leaderAddressVo.leaderId)"
+        :isCurrent="checkIsCurrent(leaderAddressVo.leaderId)"
       >
       </PickUpLocationItem>
     </view>
@@ -24,7 +24,7 @@
           {{ item.detailAddress }}
           <PickUpLocationItem
             :location="item"
-            :current="checkIsCurrent(item.id)"
+            :isCurrent="checkIsCurrent(item.id)"
             @selectPickUpLocation="selectPickUpLocation"
           ></PickUpLocationItem>
         </view>
@@ -85,9 +85,11 @@ export default {
         this.getSearchLeader();
       }
     },
-    // 选择提货点; 传入选择提货点的 id
+    // 选择提货点; 传入选择提货点的 id;
+    // 自定义事件的回调函数; 将子组件到的所选中的提货点的 id 传父组件; 进行接口的调用
     selectPickUpLocation(leaderId) {
       if (leaderId) {
+        // 调用选择提货点接口传入所选中的 id 
         return this.getSelectLeader({ leaderId });
       }
     },

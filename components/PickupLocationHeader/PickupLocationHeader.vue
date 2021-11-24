@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     ...mapActions("pickUpLocation", ["getSysRegionFindAllList"]),
+    // 映射仓库中的修改提货点
     ...mapMutations("pickUpLocation", ["SET_CURRENT_PICKUPLOCATION"]),
     // 选择器点击确认按钮时调用该函数
     findAllListConfirm(index) {
@@ -66,6 +67,7 @@ export default {
             latitude: this.latitude,
             longitude: this.longitude,
           });
+          //
           this.SET_CURRENT_PICKUPLOCATION(this.findAllList[index]);
         },
       });

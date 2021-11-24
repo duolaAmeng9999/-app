@@ -30,7 +30,7 @@ const pickUpLocation = {
         CHANGE_LEADER_ADDRESS_VO(state, result) {
             state.leaderAddressVo = result
         },
-        // 修改提点
+        // 修改头部显示提货点信息
         SET_CURRENT_PICKUPLOCATION(state, result) {
             state.currentPickUpArea = result.regionName
         }
@@ -44,7 +44,7 @@ const pickUpLocation = {
         // 选择提货点
         checkIsCurrent(state) {
             return function (id) {
-                console.log(id);
+                // 利用上次选中的提货点的 id 进行判断; 页面加载时就会有默认值
                 if (state.leaderAddressVo) {
                     // 判断选中的提货点的 id 是否和数据中的 id 相等; 返回 ture/false
                     return state.leaderAddressVo.leaderId === id;
