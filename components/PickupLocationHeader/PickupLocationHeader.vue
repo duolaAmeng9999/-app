@@ -67,7 +67,7 @@ export default {
             latitude: this.latitude,
             longitude: this.longitude,
           });
-          //
+          // 修改头部显示提货点信息
           this.SET_CURRENT_PICKUPLOCATION(this.findAllList[index]);
         },
       });

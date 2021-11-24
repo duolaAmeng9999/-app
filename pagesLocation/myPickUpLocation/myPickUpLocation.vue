@@ -57,6 +57,15 @@ export default {
     ...mapActions("pickUpLocation", ["getSelectLeader"]),
     // 自定义事件接受子组件传递过来的经纬度数据; 来获取提货点的信息
     async getSearchLeader(data) {
+      // 判断是否有 data 数据; 每次切换头部提货城市时进行数据重置
+      if (data) {
+        // 使用 Object.assign 来对 vm 实例身上的数据于原来的空数据进行合并
+        Object.assign(this.$data.filter, this.$options.data().filter);
+        Object.assign(
+          this.$data.searchResult,
+          this.$options.data().searchResult
+        );
+      }
       // 数据收并赋值于 data 中的数据
       /*  this.filter.latitude = latitude ? latitude : this.filter.latitude;
       this.filter.longitude = longitude ? longitude : this.filter.longitude; */
@@ -89,7 +98,7 @@ export default {
     // 自定义事件的回调函数; 将子组件到的所选中的提货点的 id 传父组件; 进行接口的调用
     selectPickUpLocation(leaderId) {
       if (leaderId) {
-        // 调用选择提货点接口传入所选中的 id 
+        // 调用选择提货点接口传入所选中的 id
         return this.getSelectLeader({ leaderId });
       }
     },
