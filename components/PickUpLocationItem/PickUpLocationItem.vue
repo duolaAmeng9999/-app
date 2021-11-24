@@ -1,6 +1,7 @@
 <template>
   <block>
     <u-tag
+      v-if="isCurrent"
       class="gg-current-location-tag u-m-l-20"
       mode="dark"
       text="当前提货点"
@@ -8,7 +9,11 @@
       size="mini"
     />
 
-    <view class="gg-current-location u-p-20">
+    <view
+      class="gg-current-location u-p-20"
+      @click="changePickUpLocation(location.id)"
+      :class="{ selected }"
+    >
       <u-image
         class="gg-current-location-img"
         width="150rpx"
@@ -32,7 +37,12 @@
         </view>
       </view>
       <block v-if="showRadio">
-        <u-icon name="checkmark-circle-fill" color="#fa3534" size="40" />
+        <view class="gg-current-location-btn" v-if="isCurrent">
+          <u-icon name="checkmark-circle-fill" color="#fa3534" size="40" />
+        </view>
+        <view class="gg-current-location-btn" v-else>
+          <u-icon name="checkmark-circle-fill" size="40" />
+        </view>
       </block>
     </view>
   </block>
@@ -52,6 +62,22 @@ export default {
         return {};
       },
     },
+    isCurrent: {
+      type: Boolean,
+      default: true,
+    },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    changePickUpLocation(id) {
+      this.$emit("selectPickUpLocation", id);
+    },
+  },
+  mounted() {
+    console.log(this.isCurrent);
   },
 };
 </script>

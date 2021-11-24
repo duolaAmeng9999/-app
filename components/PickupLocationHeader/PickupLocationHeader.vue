@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import { BAIDU_MAP_AK } from "../../common/const";
 // 引用百度地图微信小程序JSAPI模块
 var bmap = require("../../common/bmap-wx.min");
@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     ...mapActions("pickUpLocation", ["getSysRegionFindAllList"]),
+    ...mapMutations("pickUpLocation", ["SET_CURRENT_PICKUPLOCATION"]),
     // 选择器点击确认按钮时调用该函数
     findAllListConfirm(index) {
       // 发起geocoding检索请求
@@ -65,6 +66,7 @@ export default {
             latitude: this.latitude,
             longitude: this.longitude,
           });
+          this.SET_CURRENT_PICKUPLOCATION(this.findAllList[index]);
         },
       });
     },
