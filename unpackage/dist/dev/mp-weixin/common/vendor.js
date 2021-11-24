@@ -4364,9 +4364,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
                   context.commit("GET_SYS_REGION_FINDALL_LIST", result));case 5:_context.next = 7;return (
                   context.commit("CURRENTPICKUPAREA", result));case 7:case "end":return _context.stop();}}}, _callee);}))();
     },
-    // 当前提货点
+    // 当前提货点   
     changeLeaderAddressVo: function changeLeaderAddressVo(context, result) {
       context.commit("CHANGE_LEADER_ADDRESS_VO", result);
+    },
+    // 选择提货点
+    getSelectLeader: function getSelectLeader(_ref, payload) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var commit, dispatch, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:commit = _ref.commit, dispatch = _ref.dispatch;_context2.next = 3;return (
+                  _this2._vm.$u.api.getSelectLeader(payload));case 3:result = _context2.sent;
+                dispatch("indexModule/getHomeIndex", {}, { root: true });case 5:case "end":return _context2.stop();}}}, _callee2);}))();
     } },
 
   mutations: {
@@ -4381,6 +4386,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 修改当前提货点
     CHANGE_LEADER_ADDRESS_VO: function CHANGE_LEADER_ADDRESS_VO(state, result) {
       state.leaderAddressVo = result;
+    },
+    // 修改提点
+    SET_CURRENT_PICKUPLOCATION: function SET_CURRENT_PICKUPLOCATION(state, result) {
+      state.currentPickUpArea = result.regionName;
     } },
 
   state: {
@@ -4388,7 +4397,20 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     findAllList: [], // 指定提货点区域列表
     leaderAddressVo: "" // 当前提货点
   },
-  getters: {} };var _default =
+  getters: {
+    // 选择提货点
+    checkIsCurrent: function checkIsCurrent(state) {
+      return function (id) {
+        console.log(id);
+        if (state.leaderAddressVo) {
+          // 判断选中的提货点的 id 是否和数据中的 id 相等; 返回 ture/false
+          return state.leaderAddressVo.leaderId === id;
+        } else {
+          return false;
+        }
+      };
+    } } };var _default =
+
 
 pickUpLocation;exports.default = _default;
 

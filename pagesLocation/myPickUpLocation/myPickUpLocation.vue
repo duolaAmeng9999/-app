@@ -4,7 +4,11 @@
       @getSearchLeader="getSearchLeader"
     ></PickupLocationHeader>
     <view v-if="leaderAddressVo" class="gg-current-location-container u-m-t-20">
-      <PickUpLocationItem :location="leaderAddressVo"> </PickUpLocationItem>
+      <PickUpLocationItem
+        :location="leaderAddressVo"
+        :current="checkIsCurrent(leaderAddressVo.leaderId)"
+      >
+      </PickUpLocationItem>
     </view>
     <scroll-view
       scroll-y
@@ -18,7 +22,11 @@
           :key="item.id"
         >
           {{ item.detailAddress }}
-          <PickUpLocationItem :location="item"></PickUpLocationItem>
+          <PickUpLocationItem
+            :location="item"
+            :current="checkIsCurrent(item.id)"
+            @selectPickUpLocation="selectPickUpLocation"
+          ></PickUpLocationItem>
         </view>
       </block>
       <u-empty mode="list" v-else></u-empty>
@@ -27,7 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   name: "myPickUpLocation",
   data() {
@@ -45,6 +53,8 @@ export default {
     };
   },
   methods: {
+    // 仓库中的选择提货点映射
+    ...mapActions("pickUpLocation", ["getSelectLeader"]),
     // 自定义事件接受子组件传递过来的经纬度数据; 来获取提货点的信息
     async getSearchLeader(data) {
       // 数据收并赋值于 data 中的数据
@@ -59,25 +69,35 @@ export default {
         page: this.filter.page,
         limit: this.filter.limit,
       };
-      console.log(object);
       // 调用提货点接口
       let result = await this.$u.api.getSearchLeader(object);
-
+      // 将 data 中的旧数据进行替换
       this.searchResult = {
         ...result,
         content: [...this.searchResult.content, ...result.content],
       };
     },
+    // 滚动到底部，会触发 loadMore 事件, 下拉加载
     loadMore() {
+      // 使用后台接返回的 last 进行判断是否为最后一页
       if (!this.searchResult.last) {
         this.filter.page += 1;
         this.getSearchLeader();
       }
     },
+    // 选择提货点; 传入选择提货点的 id
+    selectPickUpLocation(leaderId) {
+      if (leaderId) {
+        return this.getSelectLeader({ leaderId });
+      }
+    },
   },
   computed: {
     ...mapState("pickUpLocation", ["leaderAddressVo"]),
+    // 选择器选择的提货点, 传入选中的 id 值
+    ...mapGetters("pickUpLocation", ["checkIsCurrent"]),
   },
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>
