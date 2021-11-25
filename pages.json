@@ -14,7 +14,6 @@
 			"path": "pages/categories/categories",
 			"style": {
 				"navigationStyle": "custom", // 隐藏导航栏
-				"navigationBarTitleText": "Hello！文静",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -90,17 +89,15 @@
 						"navigationBarTitleText": "我的提货点",
 						"enablePullDownRefresh": false
 					}
+				},
+				{
+					"path": "otherPickUpLocation/otherPickUpLocation",
+					"style": {
+						"navigationBarTitleText": "",
+						"enablePullDownRefresh": false
+					}
 				}
-			    ,{
-                    "path" : "otherPickUpLocation/otherPickUpLocation",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+			]
 		}
 	]
 }
