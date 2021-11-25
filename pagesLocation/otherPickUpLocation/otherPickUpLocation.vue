@@ -14,10 +14,12 @@
       :latitude="latitude"
       :scale="scale"
       :markers="covers"
+      @markertap="mapMarkertap"
     ></map>
     <view class="gg-location">
       <scroll-view
         scroll-y
+        :scroll-into-view="`map-${markerId}`"
         scroll-with-animation
         @scrolltolower="loadMore"
         class="gg-location-scroll"
@@ -27,6 +29,7 @@
             class="u-m-b-20"
             v-for="item in searchResult.content"
             :key="item.id"
+            :id="`map-${item.id}`"
           >
             {{ item.detailAddress }}
             <PickUpLocationItem
@@ -103,6 +106,24 @@ export default {
         ...result,
         content: [...this.searchResult.content, ...result.content],
       };
+      if (this.searchResult.length > 0) {
+        let covers = [];
+        this.searchResult.map((item) => {
+          covers.push({
+            id: item.id,
+            longitude: item.longitude,
+            latitude: item.latitude,
+            icon: "/static/images/location.png",
+            width: 30,
+            height: 30,
+          });
+          this.covers = covers;
+          let longitude = this.searchResult.content[0].location.lat;
+          let latitude = this.searchResult.content[0].location.lon;
+          this.pickUpLocationMapCtx.moveToLocation({ longitude, latitude });
+          this.scale = 12;
+        });
+      }
     },
     // 滚动到底部，会触发 loadMore 事件, 下拉加载
     loadMore() {
@@ -119,6 +140,14 @@ export default {
         // 调用选择提货点接口传入所选中的 id
         return this.getSelectLeader({ leaderId });
       }
+    },
+	 // 标记点点击操作
+    mapMarkertap({ detail: { markerId } }) {
+      this.markerId = markerId;
+    },
+    // 选择提货点
+    selectPickUpLocation(leaderId) {
+      this.selectLeaderAddressVoAction({ leaderId });
     },
   },
   mounted() {
