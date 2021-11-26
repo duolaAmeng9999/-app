@@ -33,7 +33,7 @@
         class="right-box"
         @scroll="rightScroll"
       >
-        <view v-for="(item, index) in searchResult.content" :key="item.id">
+        <view v-for="item in searchResult.content" :key="item.id">
           <view class="u-m-b-10 u-m-l-20 u-m-r-20 u-flex gg-product-item">
             <ListImageItem
               :src="item.imgUrl"
