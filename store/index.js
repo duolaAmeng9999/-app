@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 // 引入分仓库
 import indexModule from './modules/index'
 import pickUpLocation from "./modules/pickUpLocation"
+import categories from './modules/categories'
 // 使用第三方插件来将仓库的数据进行本地化存储 
 import createPersistedState from "vuex-persistedstate";
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
 	],
 	modules: {
 		indexModule,
-		pickUpLocation
+		pickUpLocation,
+		categories,
 	},
 })

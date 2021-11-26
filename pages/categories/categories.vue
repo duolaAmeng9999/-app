@@ -16,15 +16,16 @@
         :scroll-into-view="itemId"
       >
         <view
-          v-for="(item, index) in tabbar"
-          :key="index"
+          v-for="(item, index) in categories"
+          :key="item.id"
           class="u-tab-item"
           :class="[current == index ? 'u-tab-item-active' : '']"
-          @tap.stop="swichMenu(index)"
+          @tap.stop="swichMenu(item.id, index)"
         >
           <text class="u-line-1">{{ item.name }}</text>
         </view>
       </scroll-view>
+
       <scroll-view
         :scroll-top="scrollRightTop"
         scroll-y
@@ -32,52 +33,85 @@
         class="right-box"
         @scroll="rightScroll"
       >
-        <view class="page-view">
-          <view
-            class="class-item"
-            :id="'item' + index"
-            v-for="(item, index) in tabbar"
-            :key="index"
-          >
-            <view class="item-title">
-              <text>{{ item.name }}</text>
-            </view>
-            <view class="item-container">
-              <view
-                class="thumb-box"
-                v-for="(item1, index1) in item.foods"
-                :key="index1"
-              >
-                <image
-                  class="item-menu-image"
-                  :src="item1.icon"
-                  mode=""
-                ></image>
-                <view class="item-menu-name">{{ item1.name }}</view>
+        <view v-for="(item, index) in searchResult.content" :key="item.id">
+          <view class="u-m-b-10 u-m-l-20 u-m-r-20 u-flex gg-product-item">
+            <ListImageItem
+              :src="item.imgUrl"
+              width="200rpx"
+              height="200rpx"
+            ></ListImageItem>
+            <view class="gg-product-item-msg u-border-bottom u-p-b-20 u-m-l-20">
+              <view>
+                <view class="u-font-lg">{{ item.title }}</view>
+                <view class="u-type-info u-font-sm"
+                  >已售{{ item.sale }}/剩余{{ item.stock }}</view
+                >
+                <block v-if="item.ruleList">
+                  <view
+                    class="u-font-xs u-type-error-dark"
+                    v-for="(rule, ruleIndex) in item.ruleList"
+                    :key="ruleIndex"
+                    >{{ rule }}</view
+                  >
+                </block>
+              </view>
+              <view class="u-flex u-row-between">
+                <view class="u-type-error gg-product-item-msg-price-container">
+                  <text>￥</text>
+                  <text class="gg-product-item-msg-price-container-value">{{
+                    item.price
+                  }}</text>
+                </view>
+                <AddToCart></AddToCart>
               </view>
             </view>
           </view>
+          <u-gap height="20"></u-gap>
         </view>
+        <!-- 如果列表没有更多数据，则显示分隔线 -->
+        <u-divider
+          v-if="
+            !(searchResult.first && searchResult.empty) && searchResult.last
+          "
+          :height="60"
+          bg-color="transparent"
+          >我是有底线的</u-divider
+        >
+        <!-- 如果列表没有数据，则显示空内容 -->
+        <u-empty
+          mode="list"
+          :show="searchResult.first && searchResult.empty"
+        ></u-empty>
       </scroll-view>
     </view>
   </view>
 </template>
 <script>
-import classifyData from "@/common/classify.data.js";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       scrollTop: 0, //tab标题的滚动条位置
       oldScrollTop: 0,
       current: 0, // 预设当前项的值
+      categoryId: 0, // 预设选中分类的 id
       menuHeight: 0, // 左边菜单的高度
       menuItemHeight: 0, // 左边菜单item的高度
       itemId: "", // 栏目右边scroll-view用于滚动的id
-      tabbar: classifyData,
       menuItemPos: [],
       arr: [],
       scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
       timer: null, // 定时器
+      filter: {
+        page: 1, // 当前页码
+        limit: 5, // 每页记录数
+        keyword: "", // 关键字
+        wareId: "",
+      },
+      searchResult: {
+        content: [],
+        last: false,
+      }, // 搜索商品结果对象
     };
   },
   onLoad() {},
@@ -85,8 +119,14 @@ export default {
     this.getMenuItemTop();
   },
   methods: {
+    ...mapActions("categories", ["getCategories"]),
     // 点击左边的栏目切换
-    async swichMenu(index) {
+    async swichMenu(categoryId, index) {
+      // 每次切换之前将之前数据重置
+      Object.assign(this.$data.searchResult, this.$options.data().searchResult);
+      Object.assign(this.$data.filter, this.$options.data().filter);
+      // 选中商品分类菜单的 id
+      this.categoryId = categoryId;
       if (this.arr.length == 0) {
         await this.getMenuItemTop();
       }
@@ -97,6 +137,8 @@ export default {
         this.current = index;
         this.leftMenuStatus(index);
       });
+      // 获取商分类中的商品数据
+      this.getCategoryProduct();
     },
     // 获取一个目标元素的高度
     getElRect(elClass, dataVal) {
@@ -204,6 +246,41 @@ export default {
         }
       }, 10);
     },
+    // 获取商品分类中的商品列表
+    async getCategoryProduct() {
+      // 整理商品列表接口所需参数
+      const object = {
+        page: this.filter.page,
+        limit: this.filter.limit,
+        keyword: this.filter.keyword,
+        categoryId: this.categoryId,
+        wareId: this.filter.wareId,
+      };
+      // 调用接口
+      const result = await this.$u.api.getSearchSku(object);
+      this.searchResult = {
+        ...result,
+        content: [...this.searchResult.content, ...result.content], // 将之前的数据于此时的数据合并
+      };
+    },
+    // 下拉加载
+    loadMore() {
+      if (!this.searchResult.last) {
+        this.filter.page += 1;
+        this.getCategoryProduct();
+      }
+    },
+  },
+  computed: {
+    ...mapState("categories", ["categories"]),
+  },
+  async mounted() {
+    // 获取商品分类左侧菜单数据列表
+    await this.getCategories();
+    // 获取第一个商品分类菜单 id; 也就是切换到商品分类菜单时设置的默认值
+    this.categoryId = this.categories[0].id;
+    // 获取商品分类右侧的商品数据列表
+    await this.getCategoryProduct();
   },
 };
 </script>
